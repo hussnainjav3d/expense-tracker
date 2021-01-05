@@ -13,23 +13,41 @@ const Child = () => {
     });
   };
 
+  const getIncome = () => {
+    let income = 0;
+    transactions.forEach(transaction => {
+      if (transaction.amount > 0) income += parseInt(transaction.amount);
+    });
+    return income;
+  };
+
+  const getExpense = () => {
+    let expense = 0;
+    transactions.forEach(transaction => {
+      if (transaction.amount < 0) expense += parseInt(transaction.amount);
+    });
+    return expense;
+  };
+
   console.log(transactions);
   return (
     <div className="container">
       <header>
         <h1>Expense Tracker</h1>
       </header>
-      <p>Your Balance</p>
-      <h3>$260.00</h3>
+      <p />
+      <h3>
+        Your Balance <br />${getIncome() + getExpense()}
+      </h3>
       <div className="income-expense">
         <p>
           Income
           <br />
-          <span id="income">$500.00</span>
+          <span id="income">${getIncome()}</span>
         </p>
         <p>
           Expense <br />
-          <span id="expense">$500.00</span>
+          <span id="expense">${getExpense()}</span>
         </p>
       </div>
       <br />
